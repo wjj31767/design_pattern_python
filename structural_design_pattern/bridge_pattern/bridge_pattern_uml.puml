@@ -1,0 +1,44 @@
+@startuml 桥接模式类图
+' 定义抽象部分（Abstraction）
+abstract class MessageAbstraction {
+    - implementor: MessageImplementor
+    + setImplementor(implementor: MessageImplementor)
+    + sendMessage(message: String, receiver: String)
+}
+
+class EmailMessage {
+    + sendMessage(message: String, receiver: String)
+}
+
+class SmsMessage {
+    + sendMessage(message: String, receiver: String)
+}
+
+' 定义实现部分（Implementor）
+interface MessageImplementor {
+    + send(message: String, receiver: String)
+}
+
+class NormalSender {
+    + send(message: String, receiver: String)
+}
+
+class EncryptedSender {
+    + send(message: String, receiver: String)
+}
+
+' 关系定义
+MessageAbstraction <|-- EmailMessage
+MessageAbstraction <|-- SmsMessage
+MessageImplementor <|.. NormalSender
+MessageImplementor <|.. EncryptedSender
+MessageAbstraction *-- MessageImplementor : 组合（桥接关联）
+
+' 美化设置
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor #F5F5F5
+skinparam interfaceBackgroundColor #E0F8F7
+skinparam abstractClassBackgroundColor #FFF3B0
+skinparam classBorderColor #666666
+skinparam arrowThickness 1.5
+@enduml
