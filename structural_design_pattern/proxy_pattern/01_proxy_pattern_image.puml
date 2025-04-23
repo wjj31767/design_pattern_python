@@ -1,0 +1,24 @@
+@startuml
+interface Image {
+    + display()
+}
+
+class RealImage {
+    - filename: str
+    + __init__(filename: str)
+    + load_from_disk()
+    + display()
+}
+
+class ProxyImage {
+    - filename: str
+    - real_image: RealImage
+    + __init__(filename: str)
+    + display()
+}
+
+Image <|.. RealImage
+Image <|.. ProxyImage
+ProxyImage *-- RealImage : uses
+
+@enduml

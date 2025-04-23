@@ -1,0 +1,30 @@
+@startuml
+interface PromotionStrategy {
+    + discount(price)
+}
+
+class NoDiscount {
+    + discount(price): float
+}
+
+class TwentyPercentDiscount {
+    + discount(price): float
+}
+
+class FiftyOffTwoHundred {
+    + discount(price): float
+}
+
+class ShoppingCart {
+    - strategy: PromotionStrategy
+    + __init__(strategy: PromotionStrategy)
+    + set_strategy(strategy: PromotionStrategy)
+    + checkout(price): float
+}
+
+PromotionStrategy <|.. NoDiscount
+PromotionStrategy <|.. TwentyPercentDiscount
+PromotionStrategy <|.. FiftyOffTwoHundred
+ShoppingCart *-- PromotionStrategy : uses
+
+@enduml

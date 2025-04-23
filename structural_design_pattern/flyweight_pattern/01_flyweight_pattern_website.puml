@@ -1,0 +1,15 @@
+@startuml
+class Website {
+    - site_type: str
+    + __init__(site_type: str)
+    + use(user: str)
+}
+
+class WebsiteFactory {
+    - websites: dict
+    + __init__()
+    + get_website(site_type: str): Website
+}
+
+WebsiteFactory *-- Website : creates and manages
+@enduml

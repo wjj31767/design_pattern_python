@@ -1,0 +1,34 @@
+@startuml
+interface Coffee {
+    + get_description()
+    + cost()
+}
+
+class SimpleCoffee {
+    + get_description(): str
+    + cost(): float
+}
+
+abstract class CoffeeDecorator {
+    - coffee: Coffee
+    + __init__(coffee: Coffee)
+    + get_description(): str
+    + cost(): float
+}
+
+class Milk {
+    + get_description(): str
+    + cost(): float
+}
+
+class Sugar {
+    + get_description(): str
+    + cost(): float
+}
+
+Coffee <|.. SimpleCoffee
+Coffee <|.. CoffeeDecorator
+CoffeeDecorator <|.. Milk
+CoffeeDecorator <|.. Sugar
+CoffeeDecorator *-- Coffee : has a
+@enduml

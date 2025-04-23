@@ -1,0 +1,25 @@
+@startuml
+interface Component {
+    + operation()
+}
+
+class Leaf {
+    - name: str
+    + __init__(name: str)
+    + operation(): str
+}
+
+class Composite {
+    - name: str
+    - children: list
+    + __init__(name: str)
+    + add(component: Component)
+    + remove(component: Component)
+    + operation(): str
+}
+
+Component <|.. Leaf
+Component <|.. Composite
+Composite *-- Component : contains
+
+@enduml
